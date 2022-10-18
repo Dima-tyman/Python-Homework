@@ -64,4 +64,25 @@ from random_list import *
 # print(fibonachi)
 
 
-#6. Сгруппировать слова по общим буквам
+#6. Сгруппировать слова по общим буквам.
+
+# words = ['fog', 'gfo', 'oih', 'toh', 'ofg', 'hio', 'uyd', 'oht', 'gof', 'duy', 'drf']
+# group = [[words[0]]]
+#
+# for i in range(1, len(words)):
+#     find_word = False
+#     for j in range(len(group)):
+#         find_sym = True
+#         for m in words[i]:
+#             if m not in group[j][0]:
+#                 find_sym = False
+#                 break
+#         if find_sym:
+#             find_word = True
+#         if find_word:
+#             group[j].append(words[i])
+#             break
+#     if not find_word:
+#         group.append([words[i]])
+#
+# print(group)
