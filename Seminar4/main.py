@@ -39,20 +39,62 @@ from random import randint
 
 #4. Задана натуральная степень k. Сформировать случайным образом список коэффициентов (значения от 0 до 100) многочлена и записать в файл многочлен степени k.
 
-k = int(input())
-with open('file.txt', 'w', encoding='UTF-8') as f:
-    polynominal = str(randint(0, 100))
-    for i in range(1, k + 1):
-        if randint(0, 1) == 0:
-            sig = '+'
-        else:
-            sig = '-'
-        if i == 1:
-            polynominal = str(randint(0, 100)) + 'x' + sig + polynominal
-        else:
-            polynominal = str(randint(0, 100)) + 'x(' + str(i) + ')' + sig + polynominal
-    f.write(polynominal)
+# k = int(input())
+# with open('file2.txt', 'w', encoding='UTF-8') as f:
+#     polynominal = str(randint(1, 100))
+#     for i in range(1, k + 1):
+#         if randint(0, 1) == 0:
+#             sig = '+'
+#         else:
+#             sig = '-'
+#         if i == 1:
+#             polynominal = str(randint(1, 100)) + 'x' + sig + polynominal
+#         else:
+#             polynominal = str(randint(1, 100)) + 'x(' + str(i) + ')' + sig + polynominal
+#     f.write(polynominal)
 
 
 #5. Даны два файла, в каждом из которых находится запись многочлена. Задача - сформировать файл, содержащий сумму многочленов.
 
+
+with open('file1.txt', 'r', encoding='UTF-8') as A:
+    a = A.readline().replace('-', '.-')\
+                    .replace('+', '.')\
+                    .replace('(', '')\
+                    .replace(')', '')\
+                    .split('.')
+with open('file2.txt', 'r', encoding='UTF-8') as B:
+    b = B.readline().replace('-', '.-')\
+                    .replace('+', '.')\
+                    .replace('(', '')\
+                    .replace(')', '')\
+                    .split('.')
+
+for i in range(len(a)):
+    a[i] = int(a[i].split('x')[0])
+for i in range(len(b)):
+    b[i] = int(b[i].split('x')[0])
+
+if len(a) > len(b):
+    for i in range(len(a) - len(b)):
+        b.insert(0, 0)
+else:
+    for i in range(len(b) - len(a)):
+        a.insert(0, 0)
+
+c = []
+for i in range(len(a)):
+    if a[i] + b[i] >= 0 and i != 0:
+        c.append('+' + str(a[i] + b[i]))
+    else:
+        c.append(str(a[i] + b[i]))
+
+with open('sum.txt', 'w', encoding='UTF-8') as f:
+    polynominal = ''
+    for i in range(1, len(c)):
+        if i == 1:
+            polynominal = str(c[-(i + 1)]) + 'x' + polynominal
+        else:
+            polynominal = str(c[-(i + 1)]) + 'x(' + str(i) + ')' + polynominal
+    polynominal += c[-1]
+    f.write(polynominal)
